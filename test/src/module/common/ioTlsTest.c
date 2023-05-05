@@ -378,6 +378,8 @@ testRun(void)
         TEST_RESULT_BOOL(tlsClientHostVerifyName(STRDEF("host"), STRDEF("**")), false, "invalid pattern");
         TEST_RESULT_BOOL(tlsClientHostVerifyName(STRDEF("host"), STRDEF("*.")), false, "invalid pattern");
         TEST_RESULT_BOOL(tlsClientHostVerifyName(STRDEF("a.bogus.host.com"), STRDEF("*.host.com")), false, "invalid host");
+        TEST_RESULT_BOOL(tlsClientHostVerifyIPAddr(STRDEF("127.0.0.1"),strNewZN("\x7F\0\0\x01",4)), true, "pass basic IP");
+        TEST_RESULT_BOOL(tlsClientHostVerifyIPAddr(STRDEF("127.0.0.2"),strNewZN("\x7F\0\0\x01",4)), false, "fail non-matching IP");
     }
 
     // *****************************************************************************************************************************
